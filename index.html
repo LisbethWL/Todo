@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO</title>
+    <link rel="stylesheet" href="todo.css">
+    <style>
+        .done {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    
+    <main id="app">
+        <h3>{{title}}</h3>
+        <!-- @submit = når add er trykket, kan der kaldes en funktion-->
+        <!-- .prevent = omgå default action ved knap-tryk-->
+        <form @submit.prevent="addTodo">
+            <label for="newTodo">New Todo</label>
+            <!-- v-model -> bruges til newT odo string i app.js / i: data -->
+            <input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="">
+            <button type="submit" name="addBtn">Add</button>
+        </form>
+
+        <button @click="allDone" type="button" name="allBtn">Mark All Done</button>
+
+        <ul class="ba">
+        <!-- <ul> -->
+            <!-- forlykke til listen          
+            <li v-for="todo in todos">{{todo.title}} -->  
+                <!-- Nu skal der laves en check box -->
+            <li v-for="todo in todos">
+               <input type="checkbox" v-model="todo.done">
+                <span :class="{ done: todo.done }">{{todo.title}}</span> 
+                <button @click="removeTodo(todo)" type="button" name="delBtn">Remove</button>
+            </li>        
+        </ul>
+
+    </main>
+
+    <!-- https://vuejs.org/v2/guide/ -->
+<!-- development version, includes helpful console warnings -->
+<!-- gå udenom installation af Vue... herfra oprettes en vue-instans i app.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script src="app.js" charset="utf-8"></script>
+</body>
+</html>
